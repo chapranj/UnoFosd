@@ -4,9 +4,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         instantiateDeck();
-
     }
-
     public static void instantiateDeck() {
 //        int i = 0;
         ArrayList<Card> playerCards = new ArrayList<>();
@@ -14,7 +12,8 @@ public class Main {
 
         Deck deck = new Deck();
         deck.shuffleDeck();
-        System.out.println(deck.getDeck());
+
+        //Distributing cards
         for (int i = 0; i < 7; i++) {
             playerCards.add(deck.getDeck().get(i));
             deck.getDeck().remove(deck.getDeck().get(i));
@@ -24,14 +23,9 @@ public class Main {
             deck.getDeck().remove(deck.getDeck().get(i));
         }
 
-
-        Card firstCardinPile = deck.getDeck().get(14);
-
-        deck.getDeck().remove(firstCardinPile);
+        Card firstCardinPile = deck.getDeck().get(0);
         System.out.println("First card on board: "+firstCardinPile);
-        System.out.println("Deck now: "+deck.getDeck());
-        System.out.println("Now length of deck: "+deck.getDeck().size());
-        System.out.println(deck.getDeck().contains(firstCardinPile));
+        deck.getDeck().remove(firstCardinPile);
 
 
         Hand pHand = new Hand(playerCards);
@@ -65,54 +59,41 @@ public class Main {
 //            System.out.println(p.getHand().seeHand());
             int cardNumber = 1;
             for (Card card: currentPlayer.getHand().seeHand()) {
-                System.out.println(String.valueOf(cardNumber) + " " +card );
+                System.out.println(cardNumber + " " +card );
                 cardIndexHolder.put(cardNumber,card);
                 cardNumber++;
             }
-            System.out.println("Choose to Play: ");
+            System.out.println(0 + " " + "Draw a Card");
+
+            System.out.print("Choose to Play: ");
             int cardChosen = input.nextInt();
-            if(canPlayCard(firstCard,cardChosen,cardIndexHolder)){
+
+            if(cardChosen == 0){
+                currentPlayer.getHand().seeHand().add(deck.getDeck().get(0));
+                deck.getDeck().remove(0);
+            }
+            else if(canPlayCard(firstCard,cardChosen,cardIndexHolder)){
                 System.out.println("yes can play");
                 System.out.println(firstCard);
                 System.out.println(cardIndexHolder.get(cardChosen));
                 System.out.println(cardChosen);
                 System.out.println("Card removed from hand "+ currentPlayer.getHand().seeHand().get(cardChosen-1));
                 currentPlayer.getHand().seeHand().remove(cardChosen-1);
-
                 System.out.println("Now "+ currentPlayer.getName()+ "'s" +" hand "+ currentPlayer.getHand().seeHand());
             }
             else{
-                boolean cardFound = false;
                 System.out.println(currentPlayer.getHand().seeHand().contains(firstCard));
                 for (Card cardInHand: currentPlayer.getHand().seeHand() ) {
                     if ((cardInHand.getValue().equals(firstCard.getValue()) || (cardInHand.getColor().equals(firstCard.getColor())))) {
-                        cardFound = true;
                         break;
                     }
                 }
-                if (cardFound){
-                    System.out.println("Card cannot be played...play another!");
-                    continue;
-                }
-                else{
-                    System.out.println("Necessary card not in your deck...drawing....");
-                    for (Card deckCheck: deck.getDeck() ) {
-                        if ((deckCheck.getValue().equals(firstCard.getValue())||(deckCheck.getColor().equals(firstCard.getColor())))){
-                            currentPlayer.getHand().seeHand().add(deckCheck);
-                            deck.getDeck().remove(deckCheck);
-                            System.out.println("Added card "+ deckCheck);
-                            System.out.println("Now Deck "+ deck.getDeck());
-                            System.out.println("Now Hand "+ currentPlayer.getHand().seeHand());
 
-                        }
-                    }
-                }
             }
             if (currentPlayer.getHand().seeHand().isEmpty()){
                 won = true;
             }
             firstCard = cardIndexHolder.get(cardChosen);
-            System.out.println("neeche");
             Player tempPlayer = currentPlayer;
             currentPlayer = opponent;
             opponent = tempPlayer;
