@@ -78,7 +78,6 @@ public class Main {
                 System.out.println(cardChosen);
                 System.out.println("Card removed from hand "+ currentPlayer.getHand().seeHand().get(cardChosen-1));
                 currentPlayer.getHand().seeHand().remove(cardChosen-1);
-
                 System.out.println("Now "+ currentPlayer.getName()+ "'s" +" hand "+ currentPlayer.getHand().seeHand());
             }
             else{
@@ -125,3 +124,4 @@ public class Main {
     }
 
 }
+//omkar ki branch
