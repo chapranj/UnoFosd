@@ -11,7 +11,6 @@ public class Deck {
                 theDeck.add(new Card(color,val));
             }
         }
-        System.out.println(theDeck);
     }
     public List<Card> getDeck() {
         return this.theDeck;
