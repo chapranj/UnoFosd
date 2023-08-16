@@ -1,12 +1,10 @@
-import java.util.Map;
-
 public class Player {
     private String name;
-    private Hand hand;
+    private CardHolder cardHolder;
 
-    public Player(String name, Hand hand){
+    public Player(String name, CardHolder cardHolder){
         this.name= name;
-        this.hand= hand;
+        this.cardHolder = cardHolder;
     }
     public String getName() {
         return name;
@@ -16,24 +14,24 @@ public class Player {
         this.name = name;
     }
 
-    public Hand getHand() {
-        return this.hand;
+    public CardHolder getHand() {
+        return this.cardHolder;
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
+    public void setHand(CardHolder cardHolder) {
+        this.cardHolder = cardHolder;
     }
 
 
     public void playCard(Card card) {
-        hand.removeCardFromHand(card);
+        cardHolder.removeCardFromHand(card);
     }
 
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", hand=" + hand +
+                ", hand=" + cardHolder +
                 '}';
     }
 }

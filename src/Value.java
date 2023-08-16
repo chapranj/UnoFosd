@@ -8,8 +8,8 @@ public enum Value {
     SEVEN,
     EIGHT,
     NINE,
-    REVERSE,
     SKIP,
     DRAW_TWO,
-    WILD
+    DRAW_FOUR,
+    NONE
 }
