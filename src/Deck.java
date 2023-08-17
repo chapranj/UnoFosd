@@ -6,6 +6,7 @@ public class Deck implements CardHolder{
 
     }
     ArrayList<Card> cards = new ArrayList<>();
+
     public void addCardToHand(Card card){
         this.cards.add(card);
     }
