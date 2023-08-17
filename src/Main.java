@@ -6,11 +6,11 @@ public class Main {
     }
     public static void instantiateDeck() {
 
-        CardHolder player1Cards = new CardHolder();
-        CardHolder player2Cards = new CardHolder();
-        CardHolder player3Cards = new CardHolder();
+        Hand player1Cards = new Hand();
+        Hand player2Cards = new Hand();
+        Hand player3Cards = new Hand();
 
-        CardHolder deck = new CardHolder();
+        Deck deck = new Deck();
         generateDeck(deck);
         System.out.println(deck.seeHand());
         Collections.shuffle(deck.seeHand());
@@ -34,7 +34,7 @@ public class Main {
         startGame(player1,player2,player3,firstCardinPile,deck);
     }
 
-    public static void startGame(Player p1,Player p2,Player p3, Card firstCardinPile,CardHolder deck){
+    public static void startGame(Player p1,Player p2,Player p3, Card firstCardinPile,Deck deck){
         ArrayList<Player> players = new ArrayList<>();
         players.add(p1);
         players.add(p2);
@@ -69,6 +69,7 @@ public class Main {
 
             if(cardChosen == 0){
                 currentPlayer.getHand().seeHand().add(deck.seeHand().get(0));
+                System.out.println("Card drawn: " + deck.seeHand().get(0));
                 deck.seeHand().remove(0);
                 //changing players
                 currentPlayer = nextPlayer;
@@ -107,7 +108,7 @@ public class Main {
 
     }
 
-    public static void generateDeck(CardHolder deck){
+    public static void generateDeck(Deck deck){
         for (Color color : Color.values()) {
             if (color != Color.WILD) {
                 for (Value value : Value.values()) {
@@ -124,7 +125,7 @@ public class Main {
             deck.addCardToHand(new Card(Color.WILD, Value.DRAW_FOUR));
         }
     }
-    public static void getCardsFromDeck(CardHolder playerCards,CardHolder deck){
+    public static void getCardsFromDeck(Hand playerCards,Deck deck){
         for (int i = 0; i < 3; i++) {
             playerCards.addCardToHand(deck.seeHand().get(0));
             deck.seeHand().remove(deck.seeHand().get(0));
@@ -149,6 +150,7 @@ public class Main {
             nextPlayer.getHand().addCardToHand(deck.seeHand().get(1));
             deck.seeHand().remove(0);
             deck.seeHand().remove(0);
+            nextPlayer = players.get(players.indexOf(currentPlayer) + 1);
         }
 
         if(card.getValue() == Value.DRAW_FOUR){
@@ -160,6 +162,7 @@ public class Main {
             deck.seeHand().remove(0);
             deck.seeHand().remove(0);
             deck.seeHand().remove(0);
+            nextPlayer = players.get(players.indexOf(currentPlayer) + 1);
         }
 
         if(card.getValue()==Value.SKIP){

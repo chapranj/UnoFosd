@@ -1,10 +1,10 @@
 public class Player {
     private String name;
-    private CardHolder cardHolder;
+    private Hand hand;
 
-    public Player(String name, CardHolder cardHolder){
+    public Player(String name, Hand hand){
         this.name= name;
-        this.cardHolder = cardHolder;
+        this.hand = hand;
     }
     public String getName() {
         return name;
@@ -15,23 +15,23 @@ public class Player {
     }
 
     public CardHolder getHand() {
-        return this.cardHolder;
+        return this.hand;
     }
 
-    public void setHand(CardHolder cardHolder) {
-        this.cardHolder = cardHolder;
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
 
 
     public void playCard(Card card) {
-        cardHolder.removeCardFromHand(card);
+        hand.removeCardFromHand(card);
     }
 
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", hand=" + cardHolder +
+                ", hand=" + hand +
                 '}';
     }
 }

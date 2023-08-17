@@ -1,23 +1,11 @@
 import java.util.ArrayList;
 
-public class CardHolder {
-    private ArrayList<Card> cards = new ArrayList<>();
+public interface CardHolder {
 
-    public CardHolder(){
-
-    }
-    public void addCardToHand(Card card){
-        this.cards.add(card);
-    }
-    public void removeCardFromHand(Card card){
-        this.cards.remove(card);
-    }
-    public ArrayList<Card> seeHand(){
-        return this.cards;
-    }
+    void addCardToHand(Card card);
+    void removeCardFromHand(Card card);
+    ArrayList<Card> seeHand();
 
     @Override
-    public String toString() {
-        return this.cards.toString();
-    }
+    public String toString();
 }
